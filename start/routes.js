@@ -10,4 +10,10 @@ Route.post("session", "SessionController.store");
 Route.post("password", "ForgotPasswordController.store");
 Route.put("password", "ForgotPasswordController.update");
 
-Route.post("file", "FileController.store");
+Route.get("file/:id", "FileController.show");
+
+Route.group(() => {
+  Route.post("file", "FileController.store");
+
+  Route.resource("projects", "ProjectController").apiOnly();
+}).middleware("auth");
